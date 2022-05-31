@@ -7,7 +7,7 @@ const galleryMarkup = createGalleryMarkup(galleryItems);
 
 galleryConteinerRef.insertAdjacentHTML("afterbegin", galleryMarkup);
 galleryConteinerRef.addEventListener("click", onClickGalleryItem);
-window.addEventListener("keydown", onCloseModal);
+
 
 
 function createGalleryMarkup(galleryItems) {
@@ -40,13 +40,14 @@ function onClickGalleryItem(event) {
     `<img src = ${galleryItemLargeImg} width = "1280" height = "auto">`
   );
   modal.show();
+  window.addEventListener("keydown", onCloseModal);
 }
 
 function onCloseModal(event) {
   if (event.code === "Escape") {
-    console.log('qwerty')
     modal.close()
-  }  
+  }
+  window.removeEventListener("keydown", onCloseModal);
 }
 
 console.log(galleryItems);
