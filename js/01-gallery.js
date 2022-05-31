@@ -4,9 +4,11 @@ import { galleryItems } from './gallery-items.js';
 const galleryConteinerRef = document.querySelector(".gallery");
 const galleryMarkup = createGalleryMarkup(galleryItems);
 
-galleryConteinerRef.insertAdjacentHTML("afterbegin", galleryMarkup);
 
-console.log(createGalleryMarkup(galleryItems));
+galleryConteinerRef.insertAdjacentHTML("afterbegin", galleryMarkup);
+galleryConteinerRef.addEventListener("click", onClickGalleryItem);
+window.addEventListener("keydown", onCloseModal);
+
 
 function createGalleryMarkup(galleryItems) {
   return galleryItems.map(({ preview, original, description }) => {
@@ -25,6 +27,26 @@ function createGalleryMarkup(galleryItems) {
   }).join("");
 }
 
+let modal;
 
-console.log(basicLightbox);
+function onClickGalleryItem(event) {
+  event.preventDefault();
+  const galleryItemLargeImg = event.target.dataset.source;
+
+  if (event.target.nodeName !== "IMG") {
+    return;
+  }
+  modal = basicLightbox.create(
+    `<img src = ${galleryItemLargeImg} width = "1280" height = "auto">`
+  );
+  modal.show();
+}
+
+function onCloseModal(event) {
+  if (event.code === "Escape") {
+    console.log('qwerty')
+    modal.close()
+  }  
+}
+
 console.log(galleryItems);
