@@ -37,7 +37,7 @@ function onClickGalleryItem(event) {
     return;
   }
   modal = basicLightbox.create(
-    `<img src = ${galleryItemLargeImg} width = "1280" height = "auto">`
+    `<img src = ${galleryItemLargeImg} width = "800" height = "600">`
   );
   modal.show();
   window.addEventListener("keydown", onCloseModal);
