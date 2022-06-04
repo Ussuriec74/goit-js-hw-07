@@ -36,8 +36,13 @@ function onClickGalleryItem(event) {
   if (event.target.nodeName !== "IMG") {
     return;
   }
+  const options = {
+    onClose: (modal) => {
+      window.removeEventListener("keydown", onCloseModal);
+    }
+  }
   modal = basicLightbox.create(
-    `<img src = ${galleryItemLargeImg} width = "800" height = "600">`
+    `<img src = ${galleryItemLargeImg} width = "800" height = "600">`, options
   );
   modal.show();
   window.addEventListener("keydown", onCloseModal);
@@ -46,8 +51,9 @@ function onClickGalleryItem(event) {
 function onCloseModal(event) {
   if (event.code === "Escape") {
     modal.close()
+    window.removeEventListener("keydown", onCloseModal);
   }
-  window.removeEventListener("keydown", onCloseModal);
+  
 }
 
 console.log(galleryItems);
